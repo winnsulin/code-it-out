@@ -1,0 +1,35 @@
+import math
+
+def calculate_rows(items, columns):
+    return math.ceil(items / columns)
+
+def visualize_shelf(rows, columns, items):
+    # Create an empty shelf grid
+    shelf = [[' ' for _ in range(columns)] for _ in range(rows)]
+    item_count = 0
+
+    # Populate the shelf grid with 'X' where items are placed
+    for row in range(rows):
+        for col in range(columns):
+            if item_count < items:
+                shelf[row][col] = 'X'
+                item_count += 1
+
+    # Print the shelf grid upside down (bottom to top)
+    for row in reversed(shelf):
+        print(' '.join(row))
+
+# Take inputs and convert to integers
+initial_items = int(input("Enter the on-hand quantity: "))
+additional_items = int(input("Enter the arrived quantity: "))
+number_of_columns = int(input("Enter the number of facing: "))
+
+# Calculate total items
+total_items = initial_items + additional_items
+
+# Calculate the number of rows required
+number_of_rows = calculate_rows(total_items, number_of_columns)
+
+# Display the result
+print("The recommended layout is as follows")
+visualize_shelf(number_of_rows, number_of_columns, total_items)
